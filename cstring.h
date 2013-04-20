@@ -24,6 +24,7 @@
 			    : (T(x) = T(x) ? realloc(T(x), sizeof T(x)[0] * ((x).alloc += 100)) \
 					   : malloc(sizeof T(x)[0] * ((x).alloc += 100)) )]
 
+#undef DELETE
 #define DELETE(x)	ALLOCATED(x) ? (free(T(x)), S(x) = (x).alloc = 0) \
 				     : ( S(x) = 0 )
 #define CLIP(t,i,sz)	\
