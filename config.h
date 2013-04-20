@@ -31,8 +31,6 @@
 
 #define VERSION "2.1.6"
 
-#define USE_AMALLOC 0
-
 #endif
 
 #endif // CONFIG_H
