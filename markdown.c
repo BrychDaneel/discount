@@ -80,7 +80,7 @@ mkd_firstnonblank(Line *p)
 }
 
 
-static inline int
+static /*inline*/ int
 blankline(Line *p)
 {
     return ! (p && (S(p->text) > p->dle) );
@@ -346,21 +346,21 @@ isfootnote(Line *t)
 }
 
 
-static inline int
+static /*inline*/ int
 isquote(Line *t)
 {
     return (t->dle < 4 && T(t->text)[t->dle] == '>');
 }
 
 
-static inline int
+static /*inline*/ int
 iscode(Line *t)
 {
     return (t->dle >= 4);
 }
 
 
-static inline int
+static /*inline*/ int
 ishr(Line *t)
 {
     if ( ! (t->flags & CHECKED) )
@@ -410,7 +410,7 @@ ishdr(Line *t, int *htyp)
 }
 
 
-static inline int
+static /*inline*/ int
 end_of_block(Line *t)
 {
     int dummy;
