@@ -1,6 +1,11 @@
 QT       -= core gui
 
+win32-msvc* {
 TARGET = libdiscount
+} else {
+TARGET = discount
+}
+
 TEMPLATE = lib
 CONFIG += staticlib
 
