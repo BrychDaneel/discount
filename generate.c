@@ -73,7 +73,7 @@ isthisspace(MMIOT *f, int i)
 {
     int c = peek(f, i);
 
-    return isspace(c) || (c < ' ');
+    return iswspace(c) || (c < ' ');
 }
 
 
@@ -273,7 +273,7 @@ eatspace(MMIOT *f)
 {
     int c;
 
-    for ( ; ((c=peek(f, 1)) != EOF) && isspace(c); pull(f) )
+    for ( ; ((c=peek(f, 1)) != EOF) && iswspace(c); pull(f) )
 	;
     return c;
 }
@@ -1198,7 +1198,7 @@ tickhandler(MMIOT *f, int tickchar, int minticks, int allow_space, spanhandler s
     int endticks, size;
     int tick = nrticks(0, tickchar, f);
 
-    if ( !allow_space && isspace(peek(f,tick)) )
+    if ( !allow_space && iswspace(peek(f,tick)) )
 	return 0;
 
     if ( (tick >= minticks) && (size = matchticks(f,tickchar,tick,&endticks)) ) {
@@ -1336,7 +1336,7 @@ text(MMIOT *f)
 		    case '&':   Qstring("&amp;", f);
 				break;
 		    case '<':   c = peek(f,1);
-				if ( (c == EOF) || isspace(c) )
+                if ( (c == EOF) || iswspace(c) )
 				    Qstring("&lt;", f);
 				else {
 				    /* Markdown.pl does not escape <[nonwhite]
@@ -1516,7 +1516,7 @@ printtable(Paragraph *pp, MMIOT *f)
 	for (end=start ; (end < S(dash->text)) && p[end] != '|'; ++ end ) {
 	    if ( p[end] == '\\' )
 		++ end;
-	    else if ( !isspace(p[end]) ) {
+        else if ( !iswspace(p[end]) ) {
 		if ( !first) first = p[end];
 		last = p[end];
 	    }

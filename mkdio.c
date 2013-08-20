@@ -112,7 +112,7 @@ populate(getc_func getc, void* ctx, int flags)
 	    __mkd_enqueue(a, &line);
 	    S(line) = 0;
 	}
-	else if ( isprint(c) || isspace(c) || (c & 0x80) )
+    else if ( isprint(c) || iswspace(c) || (c & 0x80) )
 	    EXPAND(line) = c;
     }
 
