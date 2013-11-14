@@ -1,13 +1,15 @@
+#
+# Discount by David Parsons
+#
+# Github : https://github.com/Orc/discount
+# Webpage: http://www.pell.portland.or.us/~orc/Code/discount/
+#
 QT       -= core gui
 
-win32-msvc* {
-TARGET = libdiscount
-} else {
 TARGET = discount
-}
 
 TEMPLATE = lib
-CONFIG += staticlib
+#CONFIG += staticlib
 
 SOURCES += \
     mkdio.c \
