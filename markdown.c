@@ -530,8 +530,7 @@ islist(Line *t, int *clip, DWORD flags, int *list_type)
 	    strtoul(T(t->text)+t->dle, &q, 10);
 	    if ( (q > T(t->text)+t->dle) && (q == T(t->text) + (j-1)) ) {
 		j = nextnonblank(t,j);
-		/* *clip = j; */
-		*clip = (j > 4) ? 4 : j;
+		*clip = j;
 		*list_type = OL;
 		return AL;
 	    }
@@ -847,6 +846,12 @@ listitem(Paragraph *p, int indent, DWORD flags, linefn check)
 	UNCHECK(t);
 	t->dle = mkd_firstnonblank(t);
 
+        /* even though we had to trim a long leader off this item,
+         * the indent for trailing paragraphs is still 4...
+	 */
+	if (indent > 4) {
+	    indent = 4;
+	}
 	if ( (q = skipempty(t->next)) == 0 ) {
 	    ___mkd_freeLineRange(t,q);
 	    return 0;
@@ -1013,6 +1018,7 @@ addfootnote(Line *p, MMIOT* f)
     j = nextnonblank(p, j+2);
 
     if ( (f->flags & MKD_EXTRA_FOOTNOTE) && (T(foot->tag)[0] == '^') ) {
+	/* need to consume all lines until non-indented block? */
 	while ( j < S(p->text) )
 	    EXPAND(foot->title) = T(p->text)[j++];
 	goto skip_to_end;
