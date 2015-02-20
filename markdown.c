@@ -177,9 +177,14 @@ splitline(Line *t, int cutpoint)
 }
 
 #define UNCHECK(l) ((l)->flags &= ~CHECKED)
-#define UNLESS_FENCED(t) if (fenced) { \
+
+#ifdef WITH_FENCED_CODE
+# define UNLESS_FENCED(t) if (fenced) { \
     other = 1; l->count += (c == ' ' ? 0 : -1); \
   } else { t; }
+#else
+# define UNLESS_FENCED(t) t;
+#endif
 
 /*
  * walk a line, seeing if it's any of half a dozen interesting regular
@@ -1003,7 +1008,7 @@ addfootnote(Line *p, MMIOT* f)
     int c;
     Line *np = p->next;
 
-    Footnote *foot = &EXPAND(*f->footnotes);
+    Footnote *foot = &EXPAND(f->footnotes->note);
     
     CREATE(foot->tag);
     CREATE(foot->link);
@@ -1326,13 +1331,14 @@ mkd_compile(Document *doc, DWORD flags)
     doc->ctx->flags     = flags & USER_FLAGS;
     CREATE(doc->ctx->in);
     doc->ctx->footnotes = malloc(sizeof doc->ctx->footnotes[0]);
-    CREATE(*doc->ctx->footnotes);
+    doc->ctx->footnotes->reference = 0;
+    CREATE(doc->ctx->footnotes->note);
 
     mkd_initialize();
 
     doc->code = compile_document(T(doc->content), doc->ctx);
-    qsort(T(*doc->ctx->footnotes), S(*doc->ctx->footnotes),
-		        sizeof T(*doc->ctx->footnotes)[0],
+    qsort(T(doc->ctx->footnotes->note), S(doc->ctx->footnotes->note),
+		        sizeof T(doc->ctx->footnotes->note)[0],
 			           (stfu)__mkd_footsort);
     memset(&doc->content, 0, sizeof doc->content);
     return 1;
