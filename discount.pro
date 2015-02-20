@@ -8,6 +8,7 @@ QT       -= core gui
 
 TARGET = discount
 TEMPLATE = lib
+DEF_FILE = discount.def
 
 # compile output is unreadable with -Wall
 CONFIG += warn_off
