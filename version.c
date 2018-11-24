@@ -1,30 +1,30 @@
 #include "config.h"
 
 char markdown_version[] = VERSION
-#if TABSTOP != 4
-        " TAB=TABSTOP"
+#if 4 != 4
+		" TAB=4"
 #endif
 #if USE_AMALLOC
-        " DEBUG"
+		" DEBUG"
 #endif
 #if USE_DISCOUNT_DL
 # if USE_EXTRA_DL
-        " DL=BOTH"
+		" DL=BOTH"
 # else
-        " DL=DISCOUNT"
+		" DL=DISCOUNT"
 # endif
 #elif USE_EXTRA_DL
-        " DL=EXTRA"
+		" DL=EXTRA"
 #else
-        " DL=NONE"
+		" DL=NONE"
 #endif
 #if WITH_ID_ANCHOR
-        " ID-ANCHOR"
+		" ID-ANCHOR"
 #endif
 #if WITH_GITHUB_TAGS
-        " GITHUB-TAGS"
+		" GITHUB-TAGS"
 #endif
 #if WITH_FENCED_CODE
-        " FENCED-CODE"
+		" FENCED-CODE"
 #endif
-        ;
+		;

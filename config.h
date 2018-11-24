@@ -1,36 +1,30 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef __AC_MARKDOWN_D
+#define __AC_MARKDOWN_D 1
 
-#if defined(_WIN32) || defined(_WIN64)
 
-#include <Windows.h>
-
-#define snprintf _snprintf
-#define vsnprintf _vsnprintf
-#define strcasecmp _stricmp
-#define strncasecmp _strnicmp
-
-#define INITRNG(x) srand((unsigned int)x)
-#define COINTOSS() (rand()&1)
-
-// Set tabstops to N characters: --with-tabstops=4
-#define TABSTOP 4
-
-// Allow fenced code blocks: --with-fenced-code
-#define WITH_FENCED_CODE 1
-
-// Use id= anchors for table-of-contents links: --with-id-anchor
-#define WITH_ID_ANCHOR 1
-
-// Allow `_` and `-` in <> tags: --with-github-tags
-#define WITH_GITHUB_TAGS 1
-
-// Use Discount, Extra, or Both types of definition list: --with-dl=both
-#define USE_EXTRA_DL 1
+#define OS_LINUX 1
 #define USE_DISCOUNT_DL 1
+#define while(x) while( (x) != 0 )
+#define if(x) if( (x) != 0 )
+#define DWORD unsigned int
+#define WORD unsigned short
+#define BYTE unsigned char
+#define HAVE_BASENAME 1
+#define HAVE_LIBGEN_H 1
+#define HAVE_PWD_H 1
+#define HAVE_GETPWUID 1
+#define HAVE_SRANDOM 1
+#define INITRNG(x) srandom((unsigned int)x)
+#define HAVE_BZERO 1
+#define HAVE_RANDOM 1
+#define COINTOSS() (random()&1)
+#define HAVE_STRCASECMP 1
+#define HAVE_STRNCASECMP 1
+#define HAVE_FCHDIR 1
+#define TABSTOP 4
+#define HAVE_MALLOC_H 1
+#define PATH_FIND "/bin/find"
+#define PATH_SED "/bin/sed"
 
 #define VERSION "2.1.6"
-
-#endif
-
-#endif // CONFIG_H
+#endif/* __AC_MARKDOWN_D */

@@ -5,7 +5,7 @@
 
 typedef void MMIOT;
 
-typedef DWORD mkd_flag_t;
+typedef unsigned int mkd_flag_t;
 
 /* line builder for markdown()
  */
@@ -70,9 +70,19 @@ void mkd_e_flags(void *, mkd_callback_t);
 void mkd_e_free(void *, mkd_free_t );
 void mkd_e_data(void *, void *);
 
+
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 /* version#.
  */
 extern char markdown_version[];
+
+#ifdef __cplusplus
+}
+#endif
+
 void mkd_mmiot_flags(FILE *, MMIOT *, int);
 void mkd_flags_are(FILE*, mkd_flag_t, int);
 

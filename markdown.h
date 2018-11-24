@@ -173,6 +173,9 @@ struct string_stream {
     int   size;		/* and how much is there? */
 } ;
 
+#ifdef __cplusplus
+extern "C"{
+#endif
 
 extern int  mkd_firstnonblank(Line *);
 extern int  mkd_compile(Document *, DWORD);
@@ -223,5 +226,9 @@ extern void __mkd_enqueue(Document*, Cstring *);
 extern void __mkd_header_dle(Line *);
 
 extern int  __mkd_io_strget(struct string_stream *);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif/*_MARKDOWN_D*/
